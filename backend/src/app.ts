@@ -19,6 +19,10 @@ app.use(cors({ origin: "http://localhost:5050", credentials: true }));
 
 app.use("/auth", authRouter);
 
+app.get("/", (req, res) => {
+  res.send("Hello from Backend!");
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running ${PORT}`);
 });

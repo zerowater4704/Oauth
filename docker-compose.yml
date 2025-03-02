@@ -1,0 +1,34 @@
+services:
+  backend_prod:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: oauth_backend_prod
+    container_name: oauth_backend_prod
+    ports:
+      - "3080:3030"
+    env_file:
+      - .env.prod
+    depends_on:
+      - mongo_prod
+    networks:
+      - oauth_network_prod
+
+  mongo_prod:
+    image: mongo:6
+    container_name: oauth_mongo_prod
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data_prod:/data/db
+    networks:
+      - oauth_network_prod
+
+networks:
+  oauth_network_prod:
+
+volumes:
+  mongo_data_prod:

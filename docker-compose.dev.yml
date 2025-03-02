@@ -1,0 +1,55 @@
+services:
+  backend_dev:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    image: oauth_backend_dev
+    container_name: oauth_backend_dev
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - .env.dev
+    depends_on:
+      - mongo_dev
+    networks:
+      - oauth_network_dev
+
+  mongo_dev:
+    image: mongo:6
+    container_name: oauth_mongo_dev
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - "27017:27017"
+    networks:
+      - oauth_network_dev
+    volumes:
+      - mongo_data_dev:/data/db
+
+  frontend_dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    image: oauth_frontend_dev
+    container_name: oauth_frontend_dev
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - .env.dev
+    depends_on:
+      - backend_dev
+    networks:
+      - oauth_network_dev
+
+networks:
+  oauth_network_dev:
+
+volumes:
+  mongo_data_dev:
