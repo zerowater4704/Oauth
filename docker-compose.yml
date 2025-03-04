@@ -27,6 +27,19 @@ services:
     networks:
       - oauth_network_prod
 
+  frontend_prod:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: oauth_frontend_prod
+    container_name: oauth_frontend_prod
+    ports:
+      - "80:80"
+    depends_on:
+      - backend_prod
+    networks:
+      - oauth_network_prod
+
 networks:
   oauth_network_prod:
 
