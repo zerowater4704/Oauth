@@ -3,7 +3,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    image: oauth_backend_prod
+    image: zerowater4704/oauth_backend_prod:latest
     container_name: oauth_backend_prod
     ports:
       - "3080:3030"
@@ -31,7 +31,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    image: oauth_frontend_prod
+    image: zerowater4704/oauth_frontend_prod:latest
     container_name: oauth_frontend_prod
     ports:
       - "80:80"
