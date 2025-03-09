@@ -1,6 +1,6 @@
 const Home: React.FC = () => {
   const handleLogin = () => {
-    window.location.href = "http://localhost:3030/auth/google";
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
   };
 
   return (
