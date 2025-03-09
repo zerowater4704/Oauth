@@ -30,7 +30,7 @@ router.get(
       maxAge: 1 * 24 * 60 * 60 * 1000,
     });
 
-    res.redirect("http://localhost:5050/dash");
+    res.redirect(`${process.env.CLIENT_URL}/dash`);
   }
 );
 
