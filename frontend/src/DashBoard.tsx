@@ -10,14 +10,16 @@ const DashBoard: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     axios
-      .get("http://localhost:3030/auth/me", { withCredentials: true })
+      .get(`${import.meta.env.VITE_API_URL}/auth/me`, { withCredentials: true })
       .then((response) => setUser(response.data.user))
       .catch(() => setUser(null));
   }, []);
 
   const handleLogout = () => {
     axios
-      .get("http://localhost:3030/auth/logout", { withCredentials: true })
+      .get(`${import.meta.env.VITE_API_URL}/auth/logout`, {
+        withCredentials: true,
+      })
       .then(() => {
         setUser(null);
         window.location.href = "/";
