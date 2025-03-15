@@ -11,7 +11,7 @@ services:
       - ./backend:/app
       - /app/node_modules
     env_file:
-      - .env.dev
+      - ./backend/.env.dev
     depends_on:
       - mongo_dev
     networks:
@@ -42,7 +42,7 @@ services:
       - ./frontend:/app
       - /app/node_modules
     env_file:
-      - .env.dev
+      - ./frontend/.env.dev
     depends_on:
       - backend_dev
     networks:
